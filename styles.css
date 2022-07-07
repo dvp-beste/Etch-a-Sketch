@@ -1,0 +1,21 @@
+* {
+    box-sizing: border-box;
+}
+
+
+.container {
+    border: 1px solid;
+    max-width: 800px;
+    aspect-ratio: 1 / 1;    
+}
+
+.rows {
+    width: 100%;
+}
+
+.squares {
+    border: 1px solid;
+    aspect-ratio: 1 / 1;
+    float: left;
+}
+
