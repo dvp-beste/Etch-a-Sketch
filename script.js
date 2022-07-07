@@ -1,21 +1,12 @@
 var container = document.querySelector('.container');
 
 var pixelSize = 16;
-// Create rows
-for (let j = 0; j < pixelSize; j++) {
-    var newRow = document.createElement('div');
-    newRow.className = 'rows';
-    newRow.style.height = `${100/pixelSize}%`;
+// Create squares 
 
-    container.appendChild(newRow);
+for (let i = 0; i < Math.pow(pixelSize, 2); i++) {
+    var newDiv = document.createElement('div');
+    newDiv.className = 'squares';
+    newDiv.style.width = `${100/pixelSize}%`;
 
-        // Create squares within the new row
-
-        for (let i = 0; i < pixelSize; i++) {
-        var newDiv = document.createElement('div');
-        newDiv.className = 'squares';
-        newDiv.style.width = `${100/pixelSize}%`;
-
-        newRow.appendChild(newDiv);
-    }
+    container.appendChild(newDiv);
 }
