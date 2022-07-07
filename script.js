@@ -1,6 +1,6 @@
 var container = document.querySelector('.container');
 
-var pixelSize = 16;
+var pixelSize = 100;
 // Create squares 
 
 for (let i = 0; i < Math.pow(pixelSize, 2); i++) {

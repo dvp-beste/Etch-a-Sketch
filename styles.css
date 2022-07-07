@@ -4,13 +4,12 @@
 
 .container {
     border: 1px solid;
-    max-width: 800px;
-    aspect-ratio: 1 / 1;    
+    max-width: 840px;
+    aspect-ratio: 1 / 1; 
+    display: flex;   
+    flex-wrap: wrap;
 }
 
 .squares {
     border: 1px solid;
-    aspect-ratio: 1 / 1;
-    float: left;
 }
-
