@@ -2,16 +2,21 @@
     box-sizing: border-box;
 }
 
-.container {
+#squareContainer {
     border: 1px solid;
     max-width: 720px;
     aspect-ratio: 1 / 1; 
     display: flex;   
     flex-wrap: wrap;
-    margin: 96px auto;
+    margin: 48px auto;
 }
 
 .squares {
     border: 0.5px solid;
     border-color: rgb(218, 215, 215);
+}
+
+#popupButton {
+    margin: 24px auto;
+    display: flex;  
 }
