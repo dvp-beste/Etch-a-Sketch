@@ -1,26 +1,49 @@
-var container = document.querySelector('.container');
+var squareContainer = document.querySelector('#squareContainer');
 
-var pixelSize = 100;
+var initialNumberOfSquares = 16;
 
-// Create squares 
+// Create initial squares of 16x16
 
-for (let i = 0; i < Math.pow(pixelSize, 2); i++) {
-    var newDiv = document.createElement('div');
-    newDiv.className = 'squares';
-    newDiv.style.width = `${100/pixelSize}%`;
+createSquares(initialNumberOfSquares);
 
-    container.appendChild(newDiv);
+function createSquares(numberOfSquares) {
+    for (let i = 0; i < Math.pow(numberOfSquares, 2); i++) {
+        var newDiv = document.createElement('div');
+        newDiv.className = 'squares';
+        newDiv.style.width = `${100/numberOfSquares}%`;
+        squareContainer.appendChild(newDiv);
+    }
+    leaveTrail();
+    
 }
 
 // Leave a trail by changing the backgroundcolor of squares
 
-var squares = document.querySelectorAll('.squares');
+function leaveTrail(){
+    var squares = document.querySelectorAll('.squares');
 
+    squares.forEach(item => {
+        item.addEventListener('mouseover', changeColor);
+    })
 
-squares.forEach(item => {
-    item.addEventListener('mouseover', changeColor);
-})
-
-function changeColor(e){
-    e.target.style.backgroundColor = 'black';
+    function changeColor(e){
+        e.target.style.backgroundColor = 'black';
+    }
 }
+
+
+
+// Add popup asking for number of squares
+
+var popupButton = document.getElementById('popupButton');
+
+popupButton.addEventListener('click', askNumberOfSquares);
+
+function askNumberOfSquares(e) {
+    newNumberOfSquares = prompt("Please enter a number between 1 and 100");
+    while (squareContainer.firstChild) {
+        squareContainer.firstChild.remove();
+    }
+    createSquares(newNumberOfSquares);
+}
+
