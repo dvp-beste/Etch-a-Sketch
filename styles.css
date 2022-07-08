@@ -8,22 +8,58 @@
     aspect-ratio: 1 / 1; 
     display: flex;   
     flex-wrap: wrap;
-    margin: 48px auto;
+    margin: 36px auto;
 }
 
 .squares {
     border: 0.5px solid;
-    border-color: rgb(218, 215, 215);
+    border-color: rgb(245, 245, 245);
 }
 
+.colors,
 #popupButton {
-    margin: 48px auto;
+    margin: 16px auto;
     display: flex;  
     border-radius: 8px;
     font-family: 'Courier New', Courier, monospace;
     font-size: 18px;
     font-weight: bolder;
-    padding: 16px;
-    color: white;
-    background-color: black;
+    padding: 12px;
 }
+
+#colorContainer {
+    display: flex;
+    max-width: 720px;
+    margin: 16px auto;
+}
+
+#black {
+    background-color: black;
+    color: white;
+}
+
+#rainbow {
+    color: white;
+    background-image: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet);
+}
+
+#greyScale {
+    background-image: linear-gradient(to right, rgb(230,230,230),black);
+    color: white;
+}
+
+#white {
+    background-color: rgb(153, 203, 248);
+    color: black;
+}
+
+#clear {
+    background-color: white;
+    color: black;
+}
+
+#popupButton {
+    color: black;
+    background-color: coral;
+}
+
