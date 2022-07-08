@@ -17,6 +17,13 @@
 }
 
 #popupButton {
-    margin: 24px auto;
+    margin: 48px auto;
     display: flex;  
+    border-radius: 8px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 18px;
+    font-weight: bolder;
+    padding: 16px;
+    color: white;
+    background-color: black;
 }
