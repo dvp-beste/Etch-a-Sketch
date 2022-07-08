@@ -40,10 +40,17 @@ var popupButton = document.getElementById('popupButton');
 popupButton.addEventListener('click', askNumberOfSquares);
 
 function askNumberOfSquares(e) {
-    newNumberOfSquares = prompt("Please enter a number between 1 and 100");
-    while (squareContainer.firstChild) {
+    var newNumberOfSquares = prompt("Please enter a number between 1 and 100");
+    if (newNumberOfSquares === null){
+        return;
+    } else {
+        while (!(newNumberOfSquares > 1 && newNumberOfSquares < 100)) {
+        newNumberOfSquares = prompt("This is not a number between 1 and 100. Please enter a number between 1 and 100.");
+        }
+        while (squareContainer.firstChild) {
         squareContainer.firstChild.remove();
+        }
+        createSquares(newNumberOfSquares);
     }
-    createSquares(newNumberOfSquares);
 }
 
