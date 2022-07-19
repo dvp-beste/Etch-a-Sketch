@@ -7,7 +7,7 @@ let trailColor;
 // Create initial squares of 16x16
 createSquares(initialNumberOfSquares);
 
-// Create Squares with an EventListener to leave a trail
+// Create Squares with an EventListener to leave a trail with the selected trailColor
 
 function createSquares(numberOfSquares) {
     for (let i = 0; i < Math.pow(numberOfSquares, 2); i++) {
@@ -56,11 +56,10 @@ function changeColor(e){
         const rgbArr = currentColor.substring(4, currentColor.length-1)
                 .replace(/ /g, '')
                 .split(',');
-
         if (rgbArr[0] === rgbArr [1] && rgbArr[0] === rgbArr[2] && rgbArr[1] === rgbArr[2]){
             e.target.style.backgroundColor = `rgb(${rgbArr[0]-r/10}, ${rgbArr[0]-r/10}, ${rgbArr[0]-r/10})`
         } else {
-            e.target.style.backgroundColor = `rgb(${r-r/10},${r-r/10},${r-r/10})`;
+            e.target.style.backgroundColor = `rgb(${r*0.9},${r*0.9},${r*0.9})`;
         }
     } 
 }
