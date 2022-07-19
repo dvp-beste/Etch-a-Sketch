@@ -2,33 +2,13 @@ const squareContainer = document.querySelector('#squareContainer');
 const colorButtons = document.querySelectorAll('.colors');
 
 let initialNumberOfSquares = 16;
-let trailColor = 'white';
-const r = 255;
-
+let trailColor;
 
 // Create initial squares of 16x16
 createSquares(initialNumberOfSquares);
 
+// Create Squares with an EventListener to leave a trail
 
-// Change trailColor value
-colorButtons.forEach(item => {
-    item.addEventListener('click', (e) => {
-        trailColor = e.target.id;
-        e.target.classList.add('highlight');
-        colorButtons.forEach(i => {
-            if (e.target.id !== i.id) {
-                i.classList.remove('highlight');
-            }
-        })
-        if (trailColor === 'clear') {
-            squares.forEach(item => {
-                item.style.backgroundColor = 'white';
-            })
-        }
-    })
-})
-
-// Create Squares
 function createSquares(numberOfSquares) {
     for (let i = 0; i < Math.pow(numberOfSquares, 2); i++) {
         const newDiv = document.createElement('div');
@@ -36,38 +16,53 @@ function createSquares(numberOfSquares) {
         newDiv.style.width = `${100/numberOfSquares}%`;
         squareContainer.appendChild(newDiv);
     }
-    
-    leaveTrail();
-    
-}
 
-// Leave trail by changing the backgroundcolor of squares
-function leaveTrail(){
-    squares = document.querySelectorAll('.squares');
-    
+    let squares = document.querySelectorAll('.squares');
     squares.forEach(item => {
         item.addEventListener('mouseover', changeColor);
     })
+    
+    // Change trailColor value
+
+    colorButtons.forEach(item => {
+        item.addEventListener('click', (e) => {
+            trailColor = e.target.id;
+            e.target.classList.add('highlight');
+            colorButtons.forEach(i => {
+                if (e.target.id !== i.id) {
+                    i.classList.remove('highlight');
+                }
+            })
+            if (trailColor === 'clear') {
+                squares.forEach(item => {
+                    item.style.backgroundColor = 'white';
+                })
+            } 
+        })
+    })
 }
 
+
 // Change color according to the value of the trailcolor
+
 function changeColor(e){
+    const r = 255;
     if (trailColor === 'black' || trailColor === 'white') {
         e.target.style.backgroundColor = trailColor;
     } else if (trailColor === 'rainbow') {
-        e.target.style.backgroundColor = `rgb(${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)})`;
-    } else {
+        e.target.style.backgroundColor = `rgb(${Math.floor(Math.random()*r)},${Math.floor(Math.random()*r)},${Math.floor(Math.random()*r)})`;
+    } else if (trailColor === 'greyScale') {
         const currentColor = e.target.style.backgroundColor;
         const rgbArr = currentColor.substring(4, currentColor.length-1)
                 .replace(/ /g, '')
                 .split(',');
 
-        if (currentColor !== 'black' && rgbArr[0] === rgbArr [1] && rgbArr[0] === rgbArr[2] && rgbArr[1] === rgbArr[2]){
+        if (rgbArr[0] === rgbArr [1] && rgbArr[0] === rgbArr[2] && rgbArr[1] === rgbArr[2]){
             e.target.style.backgroundColor = `rgb(${rgbArr[0]-r/10}, ${rgbArr[0]-r/10}, ${rgbArr[0]-r/10})`
         } else {
             e.target.style.backgroundColor = `rgb(${r-r/10},${r-r/10},${r-r/10})`;
         }
-    }
+    } 
 }
 
 // Add popup asking for number of squares
@@ -88,5 +83,6 @@ function askNumberOfSquares(e) {
     squareContainer.firstChild.remove();
     }
     createSquares(newNumberOfSquares);
+    squares = document.querySelectorAll('.squares');
+    
 }
-
