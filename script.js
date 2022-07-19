@@ -2,7 +2,7 @@ const squareContainer = document.querySelector('#squareContainer');
 const colorButtons = document.querySelectorAll('.colors');
 
 let initialNumberOfSquares = 16;
-let trailColor = 'black';
+let trailColor = 'white';
 const r = 255;
 
 
@@ -14,6 +14,12 @@ createSquares(initialNumberOfSquares);
 colorButtons.forEach(item => {
     item.addEventListener('click', (e) => {
         trailColor = e.target.id;
+        e.target.classList.add('highlight');
+        colorButtons.forEach(i => {
+            if (e.target.id !== i.id) {
+                i.classList.remove('highlight');
+            }
+        })
         if (trailColor === 'clear') {
             squares.forEach(item => {
                 item.style.backgroundColor = 'white';

@@ -2,9 +2,17 @@
     box-sizing: border-box;
 }
 
+h3 {
+    text-align: center;
+    color: rgb(255, 77, 0);
+    font-size: 48px;
+    margin: 32px auto;
+    font-weight: bolder;
+}
+
 #squareContainer {
     border: 1px solid;
-    max-width: 720px;
+    max-width: 640px;
     aspect-ratio: 1 / 1; 
     display: flex;   
     flex-wrap: wrap;
@@ -18,7 +26,7 @@
 
 .colors,
 #popupButton {
-    margin: 16px auto;
+    margin: 0 auto;
     display: flex;  
     border-radius: 8px;
     font-family: 'Courier New', Courier, monospace;
@@ -27,10 +35,14 @@
     padding: 12px;
 }
 
+#popupButton {
+    margin-top: 16px;
+}
+
 #colorContainer {
     display: flex;
     max-width: 720px;
-    margin: 16px auto;
+    margin: 0 auto;
 }
 
 #black {
@@ -60,6 +72,11 @@
 
 #popupButton {
     color: black;
-    background-color: coral;
+    background-color: rgb(255, 77, 0);
 }
 
+.highlight {
+    border: 3px solid;
+    border-color: rgb(255, 77, 0);
+    box-shadow: 10px 5px 5px rgb(255, 77, 0);
+}
