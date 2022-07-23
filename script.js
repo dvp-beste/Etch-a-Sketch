@@ -1,8 +1,32 @@
 const squareContainer = document.querySelector('#squareContainer');
 const colorButtons = document.querySelectorAll('.colors');
+const clearButton = document.querySelector('#clear');
+clearButton.addEventListener('click', onClearClick);
+    
+function onClearClick(){
+    const squares = document.querySelectorAll('.squares');
+    squares.forEach(item => {
+        item.style.backgroundColor = 'white';
+    })
+}
 
 let initialNumberOfSquares = 16;
 let trailColor;
+
+// Change trailColor value
+
+colorButtons.forEach(item => {
+    item.addEventListener('click', (e) => {
+        trailColor = e.target.id;
+        e.target.classList.add('highlight');
+        colorButtons.forEach(i => {
+            if (e.target.id !== i.id) {
+                i.classList.remove('highlight');
+            }
+        })
+    })
+})
+
 
 // Create initial squares of 16x16
 createSquares(initialNumberOfSquares);
@@ -11,57 +35,42 @@ createSquares(initialNumberOfSquares);
 
 function createSquares(numberOfSquares) {
     for (let i = 0; i < Math.pow(numberOfSquares, 2); i++) {
-        const newDiv = document.createElement('div');
-        newDiv.className = 'squares';
-        newDiv.style.width = `${100/numberOfSquares}%`;
-        squareContainer.appendChild(newDiv);
+        const square = document.createElement('div');
+        square.className = 'squares';
+        square.style.width = `${100/numberOfSquares}%`;
+        square.addEventListener('mouseover', changeColor);
+        squareContainer.appendChild(square);
     }
-
-    let squares = document.querySelectorAll('.squares');
-    squares.forEach(item => {
-        item.addEventListener('mouseover', changeColor);
-    })
-    
-    // Change trailColor value
-
-    colorButtons.forEach(item => {
-        item.addEventListener('click', (e) => {
-            trailColor = e.target.id;
-            e.target.classList.add('highlight');
-            colorButtons.forEach(i => {
-                if (e.target.id !== i.id) {
-                    i.classList.remove('highlight');
-                }
-            })
-            if (trailColor === 'clear') {
-                squares.forEach(item => {
-                    item.style.backgroundColor = 'white';
-                })
-            } 
-        })
-    })
 }
 
 
 // Change color according to the value of the trailcolor
 
-function changeColor(e){
-    const r = 255;
+const maxRgbValue = 255;
+function changeColor(e) {
     if (trailColor === 'black' || trailColor === 'white') {
         e.target.style.backgroundColor = trailColor;
     } else if (trailColor === 'rainbow') {
-        e.target.style.backgroundColor = `rgb(${Math.floor(Math.random()*r)},${Math.floor(Math.random()*r)},${Math.floor(Math.random()*r)})`;
+        e.target.style.backgroundColor = paintRainbow();
     } else if (trailColor === 'greyScale') {
-        const currentColor = e.target.style.backgroundColor;
-        const rgbArr = currentColor.substring(4, currentColor.length-1)
-                .replace(/ /g, '')
-                .split(',');
-        if (rgbArr[0] === rgbArr [1] && rgbArr[0] === rgbArr[2] && rgbArr[1] === rgbArr[2]){
-            e.target.style.backgroundColor = `rgb(${rgbArr[0]-r/10}, ${rgbArr[0]-r/10}, ${rgbArr[0]-r/10})`
-        } else {
-            e.target.style.backgroundColor = `rgb(${r*0.9},${r*0.9},${r*0.9})`;
-        }
+        e.target.style.backgroundColor = paintGreyScale(e);
     } 
+}
+
+function paintRainbow() {
+    return `rgb(${Math.floor(Math.random()*maxRgbValue)},${Math.floor(Math.random()*maxRgbValue)},${Math.floor(Math.random()*maxRgbValue)})`;
+}
+
+function paintGreyScale(e) {
+    const currentColor = e.target.style.backgroundColor;
+    const rgbValuesArray = currentColor.substring(4, currentColor.length-1)
+            .replace(/ /g, '')
+            .split(',');
+    if (rgbValuesArray [0] === rgbValuesArray  [1] && rgbValuesArray [0] === rgbValuesArray [2] && rgbValuesArray [1] === rgbValuesArray [2]){
+        return `rgb(${rgbValuesArray [0]-maxRgbValue/10}, ${rgbValuesArray [0]-maxRgbValue/10}, ${rgbValuesArray [0]-maxRgbValue/10})`
+    } else {
+        return `rgb(${maxRgbValue*0.9},${maxRgbValue*0.9},${maxRgbValue*0.9})`;
+    }
 }
 
 // Add popup asking for number of squares
