@@ -81,16 +81,18 @@ popupButton.addEventListener('click', askNumberOfSquares);
 
 function askNumberOfSquares(e) {
     let newNumberOfSquares = prompt("Please enter a number between 1 and 100");
-    if (newNumberOfSquares === null){
+    if (newNumberOfSquares === null) {
         return;
+    } else if(!(newNumberOfSquares >= 1 && newNumberOfSquares <= 100) ) {
+        newNumberOfSquares = prompt("This is not a number between 1 and 100. Please enter a number between 1 and 100.");
+    } else {
+        removePreviousSquares();
+        createSquares(newNumberOfSquares);
     } 
-    while (!(newNumberOfSquares >= 1 && newNumberOfSquares <= 100)) {
-    newNumberOfSquares = prompt("This is not a number between 1 and 100. Please enter a number between 1 and 100.");
-    }
+}
+
+function removePreviousSquares() {
     while (squareContainer.firstChild) {
-    squareContainer.firstChild.remove();
+        squareContainer.firstChild.remove();
     }
-    createSquares(newNumberOfSquares);
-    squares = document.querySelectorAll('.squares');
-    
 }
